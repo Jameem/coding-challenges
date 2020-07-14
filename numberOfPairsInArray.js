@@ -1,24 +1,24 @@
 // n is the length of the array
 // ar is the array
 
-function numberOfPairsInArray(n, ar) {
-  let numberOfPairs = 0
-  let pairedIndices = []
+function numberOfPairsInArray(n, arr) {
+  let occuppances = {}
 
-  for (let i = 0; i < ar.length; i++) {
-    if (pairedIndices.includes(i)) continue
-
-    for (let j = 0; j < ar.length; j++) {
-      if (pairedIndices.includes(j)) continue
-      if (j == i) continue
-
-      if (ar[i] === ar[j]) {
-        pairedIndices.push(i, j)
-        numberOfPairs++
-        break
-      }
+  for (let i = 0; i < arr.length; i++) {
+    if (occuppances[arr[i]] === undefined) {
+      occuppances[arr[i]] = 1
+    } else {
+      occuppances[arr[i]]++
     }
   }
+
+  let keys = Object.keys(occuppances)
+
+  let numberOfPairs = 0
+  for (let i = 0; i < keys.length; i++) {
+    numberOfPairs += Math.floor(occuppances[keys[i]] / 2)
+  }
+
   return numberOfPairs
 }
 
